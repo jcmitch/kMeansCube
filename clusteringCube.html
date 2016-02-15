@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>k-Means Clustering Cube</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./css/clusteringCube.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="./js/drawCube.js"></script>
+    </head>
+    <body>
+        <h1 class="title">k-Means Clustering Cube</h1>
+        <canvas class="myCanvas" height="500" width="500"></canvas>
+        <div class="formWrapper">
+            <h2 class="message">Waiting for 3 data points...</h2>
+            <h4>Data Set:</h4>
+            <table class="dataTable">
+                <tr>
+                    <th class="clusterLbl">Cluster</th>
+                    <th>Name</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>Remove?</th>
+                </tr>
+            </table>
+            <form class="dataForm">
+                <div class="iptWpr">
+                    <span>Name:</span>
+                    <input type="text" class="dataName">
+                </div>
+                <div class="iptWpr">
+                    <span class="iptLbl">A:</span>
+                    <input type="text" class="dataA">
+                </div>
+                <div class="iptWpr">
+                    <span class="iptLbl">B:</span>
+                    <input type="text" class="dataB">
+                </div>
+                <div class="iptWpr">
+                    <span class="iptLbl">C:</span>
+                    <input type="text" class="dataC">
+                </div>
+            </form>
+            <button class="addData">Add</button>
+            <h4># of Means:</h4>
+            <form class="dataForm">
+                <input type="text" class="numOfK">
+            </form>
+            <button class="updateK">Update</button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+.myCanvas,
+.formWrapper {
+    display: inline-block;
+}
+.myCanvas {
+    margin-right: 50px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+.formWrapper {
+    margin-top: 25px;
+    vertical-align: top;
+    width: 50%;
+}
+.title {
+    text-align: center;
+}
+.iptWpr {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    display: inline-block;
+}
+.iptLbl {
+    display: inline-block;
+    width: 15px;
+}
+.dataForm {
+    display: inline-block;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    width: 18%;
+}
+.clusterLbl {
+    text-align: center;
+    width: 10%;
+}
+h4 {
+    margin: 0;
+    margin-top: 20px;
+    padding: 0;
+}
+.numOfK {
+    margin-right: 5px;
+}
+.btnWrapper {
+    text-align: center;
+}
+.dataTable {
+    margin-top: 10px;
+}
+

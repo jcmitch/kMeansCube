@@ -333,6 +333,37 @@ $(document).ready(function() {
         setup();
     }
 
+    function addData(name, newData) {
+        var checkedData = [];
+        newData.forEach(function(tmpData, idx) {
+            var isPct = false;
+            tmpData = tmpData.replace('"','');
+            if (tmpData.match('%')) {
+                tmpData = tmpData.replace('%','');
+                isPct = true;
+            }
+            if (tmpData.match(/[^\d.]/)) {
+                tmpData = 0;
+            }
+            checkedData.push({data: tmpData, isPct: isPct});
+        });
+        var a = parseFloat(checkedData[0].data);
+        var b = parseFloat(checkedData[1].data);
+        var c = parseFloat(checkedData[2].data);
+        data.push([a,b,c]);
+        name = name.replace('"', '');
+        name = name || '*empty*';
+
+        $('.dataTable tr:last').after('<tr>'+
+                    '<td class="clusterLbl">2</td>'+
+                    '<td>'+name+'</td>'+
+                    '<td>'+a+(checkedData[0].isPct ? '%' : '')+'</td>'+
+                    '<td>'+b+(checkedData[1].isPct ? '%' : '')+'</td>'+
+                    '<td>'+c+(checkedData[2].isPct ? '%' : '')+'</td>'+
+                    '<td class="btnWrapper"><button>Delete</button></td>'+
+                '</tr>');
+    }
+
     $('.updateK').on('click', function() {
         var newK = $('.numOfK').val() || '0';
         if (newK.match(/[^\d]/)) {
@@ -350,26 +381,8 @@ $(document).ready(function() {
         dataSet.push($('.dataA').val() || '0');
         dataSet.push($('.dataB').val() || '0');
         dataSet.push($('.dataC').val() || '0');
-        dataSet.forEach(function(tmpData, idx) {
-            if (tmpData.match(/[^\d.]/)) {
-                tmpData = 0;
-            }
-            checkedData.push(tmpData);
-        });
-        var a = parseFloat(checkedData[0]);
-        var b = parseFloat(checkedData[1]);
-        var c = parseFloat(checkedData[2]);
-        data.push([a,b,c]);
         var name = $('.dataName').val() || '*empty*';
-
-        $('.dataTable tr:last').after('<tr>'+
-                    '<td class="clusterLbl">2</td>'+
-                    '<td>'+name+'</td>'+
-                    '<td>'+a+'</td>'+
-                    '<td>'+b+'</td>'+
-                    '<td>'+c+'</td>'+
-                    '<td class="btnWrapper"><button>Delete</button></td>'+
-                '</tr>');
+        addData(name, dataSet);
 
         $('.dataName').val('');
         $('.dataA').val('');
@@ -391,5 +404,25 @@ $(document).ready(function() {
 
     $('.dataTable').on('mouseout', 'tr', function(evt) {
         curHoverRow = null;
+    });
+
+    $('#files').on('change', function(evt) {
+        var f = evt.target.files[0];
+        var reader = new FileReader();
+
+      reader.onload = (function(theFile) {
+        return function(e) {
+            if (e && e.target && e.target.result) {
+                var rows = JSON.stringify(e.target.result).split(/\\r/);
+                rows.forEach(function(row) {
+                    var fields = row.split(',');
+                    addData(fields[0], fields.slice(1));
+                });
+                restart();
+            }
+        };
+      })(f);
+
+      reader.readAsText(f);
     });
 });
